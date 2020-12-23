@@ -73,11 +73,19 @@
 ## synonym:4
 - four
 
-## synonym:Delhi
+## synonym:delhi
 - New Delhi
+- dilli
+- DEL
 
 ## synonym:bangalore
 - Bengaluru
+- blr
+
+## synonym:mumbai
+- Bombay
+- BOM
+- MUM
 
 ## synonym:chinese
 - chines

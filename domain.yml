@@ -6,6 +6,7 @@ actions:
 - action_validate_price
 - action_slot_reset
 - action_validate_location
+- check_location
 - utter_ask_cuisine
 - utter_ask_budget
 - utter_ask_sendmail
@@ -22,18 +23,19 @@ actions:
 entities:
 - cuisine
 - location
-- people
 - price
 - emailid
 - sendmail
+
 intents:
 - greet
 - restaurant_search
 - affirm
 - goodbye
-- stop
+- thankyou
 - email
 - deny 
+
 responses:
   utter_ask_cuisine:
   - buttons:
@@ -64,31 +66,35 @@ responses:
   - text: Hi, How can I help you!
   - text: Hey, How is it going How May I help you Today
   utter_do_not_operate:
-  - "We do not operate in that area yet"
+  - text: "We do not operate in that area yet"
   utter_ask_budget:
-  - text: "What price range are you looking at?\n
-          - Less than Rs.300\n
-          - Between Rs.300 and 700\n
-          - More than Rs.700"
+  - buttons:
+    - payload: Less than Rs.300
+      title: Less than Rs.300
+    - payload: Between Rs.300 and 700
+      title: Between Rs.300 and 700
+    - payload: More than Rs.700
+      title: More than Rs.700
+    text: What price range are you looking at ?
   utter_get_email:
-  - "Please provide your email id"
+  - text: "Please provide your email id"
   utter_ask_sendmail:
-  - "Do You need details of the top 10 restaurants on email? (yes/no)"
+  - text: "Do You need details of the top 10 restaurants on email? (yes/no)"
   utter_sent_email:
-  - "We have emailed you the list of restaurants."
-  - "Please check your mailbox, your list of restaurants is ready to view."
+  - text: "We have emailed you the list of restaurants."
+  - text: "Please check your mailbox, your list of restaurants is ready to view."
   utter_restart:
-  - "Please visit us again"
+  - text: "Please visit us again"
+
 session_config:
   carry_over_slots_to_new_session: true
   session_expiration_time: 0
+
 slots:
   cuisine:
     type: text
   location:
     type: text
-  check_op:
-    type: bool
   price:
     type: text
   emailid:
