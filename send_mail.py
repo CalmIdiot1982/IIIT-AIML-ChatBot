@@ -7,21 +7,23 @@ html_msg: the html body of the email
 from flask import Flask
 from flask_mail import Mail,Message
 import os
+import time
 app = Flask(__name__)
 
 mail_setting = {
     "MAIL_SERVER": 'smtp.gmail.com',
     "MAIL_USE_TLS": True,
-    "MAIL_USE_SSL": False,
-    "MAIL_PORT" : 465,
+    "MAIL_USE_SSL": True,
+    "MAIL_PORT" : 567,
     "MAIL_USERNAME":"skpandaupgrad@gmail.com",
     "MAIL_PASSWORD":"Cobol1982$",
 }
 app.config.update(mail_setting)
 mail = Mail(app)
 
-def mail_results(emailid, html_msg):
+def mail_results(emailid="soumyapanda1982@gmail.com", html_msg = "<html><h1>Welcome !!</h1></html>"):
     msg = Message(sender=app.config.get("MAIL_USERNAME"), recipients=[emailid])
     msg.subject = "Foodie Search Results"
     msg.html = html_msg
     mail.send(msg)
+    time.sleep(80)
