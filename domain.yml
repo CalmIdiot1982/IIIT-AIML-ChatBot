@@ -1,41 +1,59 @@
-actions:
-- action_search_restaurants
-- action_send_mail
-- action_get_mail
-- action_validate_cuisine
-- action_validate_price
-- action_slot_reset
-- action_validate_location
-- check_location
-- utter_ask_cuisine
-- utter_ask_budget
-- utter_ask_sendmail
-- utter_get_email
-- utter_sent_email
-- utter_restart
-- utter_ask_howcanhelp
-- utter_ask_location
-- utter_default
-- utter_goodbye
-- utter_greet
-- utter_do_not_operate
-
-entities:
-- cuisine
-- location
-- price
-- emailid
-- sendmail
-
+version: '2.0'
+session_config:
+  session_expiration_time: 0
+  carry_over_slots_to_new_session: true
 intents:
+- stop
+- email
+- affirm
 - greet
 - restaurant_search
-- affirm
 - goodbye
 - thankyou
-- email
-- deny 
-
+- deny
+entities:
+- cuisine
+- emailid
+- location
+- price
+- sendmail
+slots:
+  cuisine:
+    type: text
+    influence_conversation: true
+  location:
+    type: text
+    influence_conversation: true
+  price:
+    type: text
+    influence_conversation: true
+  emailid:
+    type: text
+    influence_conversation: true
+  sendmail:
+    type: text
+    influence_conversation: true
+  loc_avlbl:
+    type: categorical
+    influence_conversation: true
+    values:
+    - '1'
+    - '0'
+    - __other__
+  csn_avlbl:
+    type: categorical
+    influence_conversation: true
+    values:
+    - '1'
+    - '0'
+    - __other__
+  prc_avlbl:
+    type: categorical
+    influence_conversation: true
+    values:
+    - '1'
+    - '0'
+    - __other__
 responses:
   utter_ask_cuisine:
   - buttons:
@@ -66,7 +84,7 @@ responses:
   - text: Hi, How can I help you!
   - text: Hey, How is it going How May I help you Today
   utter_do_not_operate:
-  - text: "We do not operate in that area yet"
+  - text: We do not operate in that area yet
   utter_ask_budget:
   - buttons:
     - payload: Less than Rs.300
@@ -77,44 +95,32 @@ responses:
       title: More than Rs.700
     text: What price range are you looking at ?
   utter_get_email:
-  - text: "Please provide your email id"
+  - text: Please provide your email id
   utter_ask_sendmail:
-  - text: "Do You need details of the top 10 restaurants on email? (yes/no)"
+  - text: Do You need details of the top 10 restaurants on email? (yes/no)
   utter_sent_email:
-  - text: "We have emailed you the list of restaurants."
-  - text: "Please check your mailbox, your list of restaurants is ready to view."
+  - text: We have emailed you the list of restaurants.
+  - text: Please check your mailbox, your list of restaurants is ready to view.
   utter_restart:
-  - text: "Please visit us again"
-
-session_config:
-  carry_over_slots_to_new_session: true
-  session_expiration_time: 0
-
-slots:
-  cuisine:
-    type: text
-  location:
-    type: text
-  price:
-    type: text
-  emailid:
-    type: text
-  sendmail:
-    type: text
-  loc_avlbl:
-    type: categorical
-    values:
-    - 1
-    - 0
-  csn_avlbl:
-    type: categorical
-    values:
-    - 1
-    - 0
-  prc_avlbl:
-    type: categorical
-    values:
-    - 1
-    - 0
-
-  
+  - text: Please visit us again
+actions:
+- action_get_mail
+- action_search_restaurants
+- action_send_mail
+- action_slot_reset
+- action_validate_cuisine
+- action_validate_location
+- action_validate_price
+- check_location
+- utter_ask_budget
+- utter_ask_cuisine
+- utter_ask_howcanhelp
+- utter_ask_location
+- utter_ask_sendmail
+- utter_default
+- utter_do_not_operate
+- utter_get_email
+- utter_goodbye
+- utter_greet
+- utter_restart
+- utter_sent_email
