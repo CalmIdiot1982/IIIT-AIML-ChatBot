@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import unicode_literals
 from ssl import SSL_ERROR_EOF
-import send_mail
+import simple_mail
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 
@@ -37,6 +37,7 @@ class ActionSearchRestaurants(Action):
 		results=zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 5)
 		d = json.loads(results)
 		response=""
+		
 		if d['results_found'] == 0:
 			response= "no results"
 		else:
@@ -105,11 +106,12 @@ class SendMail(Action):
 		
 		rest_df_html = rest_df_sorted.head(10).to_html(index=False)
 		html_msg = "<p>Hi!<br>Here are the top %s restaurants in %s for budget of %s<br><br>"%(cuisine,loc,prc)+rest_df_html+"</p>"
-		send_mail.mail_results(emailid, html_msg)
+		simple_mail.mail_results(emailid, html_msg)
 
 class  GetMail(Action):
 	def name(self):
 		return 'action_get_mail'	
+
 	def run(self,dispatcher, tracker, domain):
 		return [SlotSet('emailid',tracker.latest_message.text)]
 
