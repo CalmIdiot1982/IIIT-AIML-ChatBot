@@ -136,3 +136,27 @@
 * greet
     - utter_greet
 * restaurant_search
+
+* greet
+    - utter_greet
+* restaurant_search{"cuisine": "chinese"}
+    - slot{"cuisine": "chinese"}
+    - utter_ask_location
+* restaurant_search{"location": "bangalore"}
+    - slot{"location": "bangalore"}
+    - utter_ask_budget
+* restaurant_search{"price": "Rs.300 and 700"}
+    - slot{"price": "Rs.300 and 700"}
+    - action_search_restaurants
+    - slot{"location": "bangalore"}
+    - slot{"cuisine": "chinese"}
+    - slot{"price": "Rs.300 and 700"}
+    - utter_ask_sendmail
+* affirm
+    - utter_get_email
+* email{"emailid": "soumyapanda1982@gmail.com"}
+    - slot{"emailid": "soumyapanda1982@gmail.com"}
+    - action_send_mail
+    - utter_sent_email
+* affirm
+    - utter_goodbye

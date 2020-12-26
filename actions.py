@@ -28,25 +28,40 @@ class ActionSearchRestaurants(Action):
 		config={ "user_key": ZOMATO_API_KEY}
 		zomato = zomatopy.initialize_app(config)
 		loc = tracker.get_slot('location')
+		prc = tracker.get_slot('price')
 		cuisine = tracker.get_slot('cuisine')
 		location_detail=zomato.get_location(loc, 1)
 		d1 = json.loads(location_detail)
 		lat=d1["location_suggestions"][0]["latitude"]
 		lon=d1["location_suggestions"][0]["longitude"]
 		cuisines_dict={'bakery':5,'chinese':25,'cafe':30,'italian':55,'biryani':7,'north indian':50,'south indian':85}
-		results=zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 5)
+		results=zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 10)
 		d = json.loads(results)
 		response=""
-		
-		if d['results_found'] == 0:
-			response= "no results"
-		else:
-			for restaurant in d['restaurants']:
-				response=response+ "Found "+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+"\n"
-		
-		dispatcher.utter_message("---------"+response)
 
-		return [SlotSet('location',loc)]
+		if d['results_found'] == 0:
+			dispatcher.utter_message= "no results"
+		else:
+			rest_name_list = [restaurant['restaurant']['name'] for restaurant in d['restaurants']]
+			rest_location_list = [restaurant['restaurant']['location']['address'] for restaurant in d['restaurants']]
+			rest_rating_list = [restaurant['restaurant']['user_rating']['aggregate_rating'] for restaurant in d['restaurants']]
+			rest_budg_list = [restaurant['restaurant']['average_cost_for_two'] for restaurant in d['restaurants']]
+			pd.set_option('display.max_colwidth', -1)
+			rest_df = pd.DataFrame({'name':rest_name_list, 'location':rest_location_list, 'rating':rest_rating_list, 'avg_cost_for2':rest_budg_list})
+			
+			if prc == "less than 300":
+				rest_df_filter = rest_df[rest_df['avg_cost_for2']<300]
+			elif prc == "300 to 700":
+				rest_df_filter = rest_df[(rest_df['avg_cost_for2']>=300) & (rest_df['avg_cost_for2']<=700)]
+			else:
+				rest_df_filter = rest_df[(rest_df['avg_cost_for2']>700)]
+			
+			rest_df_sorted = rest_df_filter.sort_values(by=['rating'], ascending=False)
+			dispatcher.utter_message("-----Here are the top " + cuisine + " restaurants in " + loc + " with avg. budget of " + prc + " Rs. for 2 people-----")
+			for row in rest_df_sorted.head(5).iterrows():
+				dispatcher.utter_message(row[1]['name']+" in "+row[1]['location']+" has been rated "+row[1]['rating']+"\n")
+		return [SlotSet('location',loc),SlotSet('cuisine',cuisine),SlotSet('price',prc)]
+
 
 class CheckLocation(Action):
 	def name(self):
