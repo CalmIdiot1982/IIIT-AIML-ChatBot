@@ -5,6 +5,7 @@ from ssl import SSL_ERROR_EOF
 import simple_mail
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
+from rasa_sdk.events import AllSlotsReset
 
 import zomatopy
 import json
@@ -34,13 +35,16 @@ class ActionSearchRestaurants(Action):
 		d1 = json.loads(location_detail)
 		lat=d1["location_suggestions"][0]["latitude"]
 		lon=d1["location_suggestions"][0]["longitude"]
-		cuisines_dict={'bakery':5,'chinese':25,'cafe':30,'italian':55,'biryani':7,'north indian':50,'south indian':85}
+		cuisines_dict={'american':1,'chinese':25,'italian':55,'mexican':73,'north indian':50,'south indian':85}
 		results=zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 10)
 		d = json.loads(results)
-		response=""
+		rest_name_list = []
+		rest_location_list = []
+		rest_rating_list = []
+		rest_price_list = []
 
 		if d['results_found'] == 0:
-			dispatcher.utter_message= "no results"
+			dispatcher.utter_message= "No results found."
 		else:
 			rest_name_list = [restaurant['restaurant']['name'] for restaurant in d['restaurants']]
 			rest_location_list = [restaurant['restaurant']['location']['address'] for restaurant in d['restaurants']]
@@ -55,7 +59,7 @@ class ActionSearchRestaurants(Action):
 				rest_df_filter = rest_df[(rest_df['avg_cost_for2']>=300) & (rest_df['avg_cost_for2']<=700)]
 			else:
 				rest_df_filter = rest_df[(rest_df['avg_cost_for2']>700)]
-			
+			print("cuisine:",cuisine,"location:",loc,"price:",prc)
 			rest_df_sorted = rest_df_filter.sort_values(by=['rating'], ascending=False)
 			dispatcher.utter_message("-----Here are the top " + cuisine + " restaurants in " + loc + " with avg. budget of " + prc + " Rs. for 2 people-----")
 			for row in rest_df_sorted.head(5).iterrows():
@@ -132,7 +136,7 @@ class  GetMail(Action):
 
 class ActionSlotReset(Action):
     def name(self):
-        return 'action_slot_reset'
+        return 'slot_reset_TBD'
 
 
 class ValidatePrice(Action):
@@ -177,4 +181,8 @@ class ValidateLocation(Action):
 			dispatcher.utter_message("Location Found.")
 			return [SlotSet("loc_avlbl","1")]
 
-	
+class SlotReset(Action):
+	def name(self):
+		return 'action_slot_reset'
+	def run(self,dispatcher, tracker,domain):
+		return [AllSlotsReset()]	

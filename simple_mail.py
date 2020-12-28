@@ -1,9 +1,8 @@
 import smtplib
 
 sender_email = "skpandaupgrad@gmail.com"
-reciever_email = "soumyapanda1982@gmail.com"
 password = "Cobol1982$"
-message = "This message was sent from simple_email"
+
 
 
 def mail_results(emailid,html_msg="blank message"):

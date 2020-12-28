@@ -3,9 +3,9 @@ session_config:
   session_expiration_time: 0
   carry_over_slots_to_new_session: true
 intents:
-- restaurant_search
-- greet
 - affirm
+- greet
+- restaurant_search
 - email
 - stop
 - goodbye
@@ -66,9 +66,9 @@ responses:
     - payload: Italian
       title: Italian
     - payload: South Indian
-      title: South Indian
+      title: south Indian
     - payload: North Indian
-      title: North Indian
+      title: north Indian
     text: what kind of cuisine would you like?
   utter_ask_howcanhelp:
   - text: how can I help you?

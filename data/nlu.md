@@ -11,6 +11,7 @@
 - great choice
 - sounds really good
 - thanks
+- no
 
 ## intent:goodbye
 - bye
@@ -31,6 +32,7 @@
 - good morning
 - good evening
 - dear sir
+- Hello
 
 ## intent:restaurant_search
 - i'm looking for a place to eat
@@ -47,14 +49,16 @@
 - I am looking for [asian fusion](cuisine) food
 - I am looking a restaurant in [294328](location)
 - in [Gurgaon](location)
-- [South Indian](cuisine)
-- [North Indian](cuisine)
+- [South Indian]{"entity": "cuisine", "value": "south indian"}
+- [North Indian]{"entity": "cuisine", "value": "north indian"}
 - [Italian](cuisine)
 - [Chinese]{"entity": "cuisine", "value": "chinese"}
 - [chinese](cuisine)
 - [Lithuania](location)
 - Oh, sorry, in [Italy](location)
 - in [delhi](location)
+- looking for restaurants in [mirzapur](location)
+- restaurants in [jhumritalaiya](location)
 - i am looking for an [indian](cuisine) spot
 - I am looking for some restaurants in [Mumbai](location)
 - I am looking for [mexican indian fusion](cuisine)
@@ -91,7 +95,21 @@
 - I am looking a restaurant in [560093](location)
 - looking for [chinese](cuisine) restaurant
 - [bangalore](location)
-- [Between](price) [Rs.300 and 700](price)
+- Between Rs.[300 and 700](price)
+- looking for restaurant
+- [South Indian](cuisine)
+- Between [Rs.300]{"entity": "price", "value": "300 to 700"} and [700]{"entity": "price", "value": "300 to 700"}
+- looking for restaurants in [delhi](location)
+- Between Rs.300 and [700]{"entity": "price", "value": "300 to 700"}
+- searching for restaurant in [bangalore](location)
+- [Mexican](cuisine)
+- [More than Rs.700]{"entity": "price", "value": "more than 700"}
+- Between Rs.300 and 700]{"entity": "price", "value": "300 to 700"}
+- looking for [vegetrarian](cuisine) restaurant.
+- looking for [vegetarian](cuisine) restaurants in [bangalore](location)
+- are there any [classy]{"entity": "price", "value": "more than 700"} [italian](cuisine) restaurants in [mumbai](location)
+- looking for [chinese](cuisine) restaurants in [delhi](location)
+- [More than Rs.700]{"entity": "price", "value": "more than 700"}
 
 ## intent:email
 - [soumyapanda1982@gmail.com](emailid)
@@ -99,15 +117,28 @@
 - [shruti_joshi@gmail.in](emailid)
 - [rajeev_mathur@hotmail.web](emailid)
 - [divyaj17@yahoo.com](emailid)
-- [soumyapanda1982@gmail.com](emailid)
+- my email id is [soumyapanda1982@gmail.com](emailid)
+
+## synonym: Bokaro Steel City
+- Bokaro
+- steel city
+- steelcity
+
+## synonym: Rourkela
+- rkl
+- raurkela
+
+## synonym: Thiruvananthapuram
+- trivandrum
+- tvm
 
 ## synonym: more than 700
 - more than rs 700
 - >700
+- classy
 - expensive
 - > 700
 - gourmet
-- classy
 - high class
 - fancy
 - > 700 Rs
@@ -122,6 +153,8 @@
 - Rs.300 to Rs.700
 - 300 to 700 rs
 - 300-700
+- Rs.300
+- 700
 - 300 to 700
 - reasonable
 - between rs. 300 and 700
@@ -136,7 +169,6 @@
 - rs.300
 - rs.500
 - upto 700 rs.
-- 700
 
 ## synonym:4
 - four
@@ -188,11 +220,18 @@
 - high range
 - high end
 - > rs.700
+- More than Rs.700
 
 ## synonym:mumbai
 - Bombay
 - BOM
 - MUM
+
+## synonym:north indian
+- North Indian
+
+## synonym:south indian
+- South Indian
 
 ## synonym:vegetarian
 - veggie

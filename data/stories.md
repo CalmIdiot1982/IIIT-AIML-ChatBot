@@ -1,3 +1,4 @@
+
 ## complete path
 * greet
     - utter_greet
@@ -48,7 +49,7 @@
     - utter_ask_location
 * restaurant_search{"location": "italy"}
     - slot{"location": "italy"}
-	- utter_ask_cuisine
+    - utter_ask_cuisine
 * restaurant_search{"cuisine": "chinese"}
     - slot{"cuisine": "chinese"}
     - action_search_restaurants
@@ -82,7 +83,7 @@
     - slot{"location": "mumbai"}
 * stop
 
-## interactive_story_1
+## interactive_story_2
 * greet
     - utter_greet
 * restaurant_search
@@ -95,7 +96,7 @@
     - action_search_restaurants
     - slot{"location": "mumbai"}
 
-## interactive_story_1
+## interactive_story_3
 * greet
     - utter_greet
 * restaurant_search{"cuisine": "chinese", "location": "delhi"}
@@ -119,38 +120,28 @@
     - utter_goodbye
 
 
-## interactive_story_1
+
+## Story 1
 * greet
     - utter_greet
-* restaurant_search{"cuisine": "chinese"}
-    - slot{"cuisine": "chinese"}
-    - utter_ask_location
 * restaurant_search{"location": "delhi"}
     - slot{"location": "delhi"}
+    - utter_ask_cuisine
+* restaurant_search{"cuisine": "south indian"}
+    - slot{"cuisine": "south indian"}
+    - action_validate_cuisine
+    - slot{"csn_avlbl": "1"}
+    - action_validate_location
+    - slot{"loc_avlbl": "1"}
+    - utter_ask_budget
+* restaurant_search{"price": "300 to 700"}
+    - slot{"price": "300 to 700"}
+    - action_validate_price
+    - slot{"prc_avlbl": "1"}
     - action_search_restaurants
     - slot{"location": "delhi"}
-* affirm
-    - utter_goodbye
-
-## interactive_story_1
-* greet
-    - utter_greet
-* restaurant_search
-
-* greet
-    - utter_greet
-* restaurant_search{"cuisine": "chinese"}
-    - slot{"cuisine": "chinese"}
-    - utter_ask_location
-* restaurant_search{"location": "bangalore"}
-    - slot{"location": "bangalore"}
-    - utter_ask_budget
-* restaurant_search{"price": "Rs.300 and 700"}
-    - slot{"price": "Rs.300 and 700"}
-    - action_search_restaurants
-    - slot{"location": "bangalore"}
-    - slot{"cuisine": "chinese"}
-    - slot{"price": "Rs.300 and 700"}
+    - slot{"cuisine": "south indian"}
+    - slot{"price": "300 to 700"}
     - utter_ask_sendmail
 * affirm
     - utter_get_email
@@ -158,5 +149,71 @@
     - slot{"emailid": "soumyapanda1982@gmail.com"}
     - action_send_mail
     - utter_sent_email
+    - utter_goodbye
+    - action_restart
+
+## Story do_not_operate
+
+* greet
+    - utter_greet
+* restaurant_search{"location": "mirzapur"}
+    - slot{"location": "mirzapur"}
+    - action_validate_location
+    - slot{"loc_avlbl": "0"}
+    - utter_do_not_operate
+    - utter_goodbye
+    - action_restart
+
+## dont send email
+* greet
+    - utter_greet
+* restaurant_search{"location": "bangalore"}
+    - slot{"location": "bangalore"}
+    - action_validate_location
+    - slot{"loc_avlbl": "1"}
+    - utter_ask_cuisine
+* restaurant_search{"cuisine": "Mexican"}
+    - slot{"cuisine": "Mexican"}
+    - action_validate_cuisine
+    - slot{"csn_avlbl": "1"}
+    - utter_ask_budget
+* restaurant_search{"price": "300 to 700"}
+    - slot{"price": "300 to 700"}
+    - action_validate_price
+    - slot{"prc_avlbl": "1"}
+    - action_search_restaurants
+    - slot{"location": "bangalore"}
+    - slot{"cuisine": "Mexican"}
+    - slot{"price": "300 to 700"}
+    - utter_ask_sendmail
 * affirm
     - utter_goodbye
+    - action_restart
+
+* greet
+    - utter_greet
+* restaurant_search{"cuisine": "chinese", "location": "delhi"}
+    - slot{"cuisine": "chinese"}
+    - slot{"location": "delhi"}
+    - action_validate_cuisine
+    - slot{"csn_avlbl": "1"}
+    - action_validate_location
+    - slot{"loc_avlbl": "1"}
+    - utter_ask_budget
+* restaurant_search{"price": "more than 700"}
+    - slot{"price": "more than 700"}
+    - action_validate_price
+    - slot{"prc_avlbl": "1"}
+    - action_search_restaurants
+    - slot{"location": "delhi"}
+    - slot{"cuisine": "chinese"}
+    - slot{"price": "more than 700"}
+    - utter_ask_sendmail
+* affirm
+    - utter_get_email
+* email{"emailid": "soumyapanda1982@gmail.com"}
+    - slot{"emailid": "soumyapanda1982@gmail.com"}
+    - action_send_mail
+    - utter_sent_email
+    - utter_goodbye
+    - action_restart
