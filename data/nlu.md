@@ -109,7 +109,11 @@
 - looking for [vegetarian](cuisine) restaurants in [bangalore](location)
 - are there any [classy]{"entity": "price", "value": "more than 700"} [italian](cuisine) restaurants in [mumbai](location)
 - looking for [chinese](cuisine) restaurants in [delhi](location)
-- [More than Rs.700]{"entity": "price", "value": "more than 700"}
+- looking for [chinese](cuisine) food in [mumbai](location) in [mid range]{"entity": "price", "value": "300 to 700"} budget
+- [mid]{"entity": "price", "value": "300 to 700"}
+- [low budget]{"entity": "price", "value": "less than 300"}
+- [economical]{"entity": "price", "value": "less than 300"}
+- looking for [chinese](cuisine) restaurants in [delhi](location) in [mid range]{"entity": "price", "value": "300 to 700"}
 
 ## intent:email
 - [soumyapanda1982@gmail.com](emailid)
@@ -118,6 +122,7 @@
 - [rajeev_mathur@hotmail.web](emailid)
 - [divyaj17@yahoo.com](emailid)
 - my email id is [soumyapanda1982@gmail.com](emailid)
+- [abhinav06501@gmail.com](emailid)
 
 ## synonym: Bokaro Steel City
 - Bokaro
@@ -155,13 +160,14 @@
 - 300-700
 - Rs.300
 - 700
+- mid range
+- mid
 - 300 to 700
 - reasonable
 - between rs. 300 and 700
 - around 700
 - < 700
 - mid budget
-- mid range
 - medium price
 - > 300
 - within 500 Rs
@@ -197,6 +203,8 @@
 - under rs 300
 - below 300
 - <300
+- low budget
+- economical
 - cheap
 - between Rs. 100 and 300
 - pocket-friendly

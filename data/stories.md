@@ -189,7 +189,7 @@
 * affirm
     - utter_goodbye
     - action_restart
-
+## story interactive 10
 * greet
     - utter_greet
 * restaurant_search{"cuisine": "chinese", "location": "delhi"}
@@ -217,3 +217,176 @@
     - utter_sent_email
     - utter_goodbye
     - action_restart
+
+## story interactive 11
+* restaurant_search{"cuisine": "chinese", "location": "delhi", "price": "300 to 700"}
+    - slot{"cuisine": "chinese"}
+    - slot{"location": "delhi"}
+    - slot{"price": "300 to 700"}
+    - action_validate_price
+    - slot{"prc_avlbl": "1"}
+    - action_validate_cuisine
+    - slot{"csn_avlbl": "1"}
+    - action_validate_location
+    - slot{"loc_avlbl": "1"}
+    - action_search_restaurants
+    - slot{"location": "delhi"}
+    - slot{"cuisine": "chinese"}
+    - slot{"price": "300 to 700"}
+    - utter_ask_sendmail
+* email{"emailid": "abhinav06501@gmail.com"}
+    - slot{"emailid": "abhinav06501@gmail.com"}
+    - action_send_mail
+    - utter_sent_email
+    - utter_goodbye
+    - action_restart
+
+## complete affirm-1
+* greet
+    - utter_greet
+* restaurant_search
+    - utter_ask_location
+* restaurant_search{"location": "Hyderabad"}
+    - slot{"location": "Hyderabad"}
+	- action_validate_location
+* restaurant_search{"loc_avlbl":"1"}
+    - utter_ask_budget
+* restaurant_search{"price": "Less than Rs.300"}
+    - slot{"price": "Less than Rs.300"}
+    - utter_ask_cuisine
+* restaurant_search{"cuisine": "chinese"}
+    - slot{"cuisine": "chinese"}
+    - action_search_restaurants
+    - slot{"location": "Hyderabad"}
+    - slot{"cuisine": "chinese"}
+    - slot{"price": "Less than Rs.300"}
+    - utter_ask_sendmail
+* affirm
+    - utter_get_email
+* email{"emailid": "abhinav06501@gmail.com"}
+    - slot{"emailid": "abhinav06501@gmail.com"}
+    - action_send_mail
+    - utter_sent_email
+* affirm
+    - utter_restart
+* reject
+    - action_slot_reset
+    - reset_slots
+    - utter_goodbye
+
+## complete affirm-2
+* greet
+    - utter_greet
+* restaurant_search
+    - utter_ask_location
+* restaurant_search{"location": "Hyderabad"}
+    - slot{"location": "Hyderabad"}
+    - utter_ask_budget
+* restaurant_search{"price": "Less than Rs.300"}
+    - slot{"price": "Less than Rs.300"}
+    - utter_ask_cuisine
+* restaurant_search{"cuisine": "chinese"}
+    - slot{"cuisine": "chinese"}
+    - action_search_restaurants
+    - slot{"location": "Hyderabad"}
+    - slot{"cuisine": "chinese"}
+    - slot{"price": "Less than Rs.300"}
+    - utter_ask_sendmail
+* affirm
+    - utter_get_email
+* email{"emailid": "abhinav06501@gmail.com"}
+    - slot{"emailid": "abhinav06501@gmail.com"}
+    - action_send_mail
+    - utter_sent_email
+* affirm
+    - utter_restart
+* affirm
+    - action_slot_reset
+    - reset_slots
+    - utter_startagain
+	- utter_ask_location
+
+## complete reject-1
+* greet
+    - utter_greet
+* restaurant_search
+    - utter_ask_location
+* restaurant_search{"location": "Hyderabad"}
+    - slot{"location": "Hyderabad"}
+    - utter_ask_budget
+* restaurant_search{"price": "Less than Rs.300"}
+    - slot{"price": "Less than Rs.300"}
+    - utter_ask_cuisine	
+* restaurant_search{"cuisine": "chinese"}
+    - slot{"cuisine": "chinese"}
+    - action_search_restaurants
+    - slot{"location": "Hyderabad"}
+    - slot{"cuisine": "chinese"}
+    - slot{"price": "Less than Rs.300"}
+    - utter_ask_sendmail
+* reject
+    - utter_restart
+* reject
+    - action_slot_reset
+    - reset_slots
+    - utter_goodbye
+	
+## complete restart-2
+* greet
+    - utter_greet
+* restaurant_search
+    - utter_ask_location
+* restaurant_search{"location": "Hyderabad"}
+    - slot{"location": "Hyderabad"}
+    - utter_ask_budget
+* restaurant_search{"price": "Less than Rs.300"}
+    - slot{"price": "Less than Rs.300"}
+    - utter_ask_cuisine	
+* restaurant_search{"cuisine": "chinese"}
+    - slot{"cuisine": "chinese"}
+    - action_search_restaurants
+    - slot{"location": "Hyderabad"}
+    - slot{"cuisine": "chinese"}
+    - slot{"price": "Less than Rs.300"}
+    - utter_ask_sendmail
+* reject
+    - utter_restart
+* affirm
+    - action_slot_reset
+    - reset_slots
+    - utter_startagain
+	- utter_ask_location
+	
+## complete locaffirm-1
+* greet
+    - utter_greet
+* restaurant_search
+    - utter_ask_location
+* restaurant_search{"location": "Hyderabad"}
+    - slot{"location": "Hyderabad"}
+	- action_validate_location
+* restaurant_search{"loc_avlbl":"1"}
+    - utter_ask_budget
+* restaurant_search{"price": "Less than Rs.300"}
+    - slot{"price": "Less than Rs.300"}
+    - utter_ask_cuisine
+* restaurant_search{"cuisine": "chinese"}
+    - slot{"cuisine": "chinese"}
+    - action_search_restaurants
+    - slot{"location": "Hyderabad"}
+    - slot{"cuisine": "chinese"}
+    - slot{"price": "Less than Rs.300"}
+    - utter_ask_sendmail
+* affirm
+    - utter_get_email
+* email{"emailid": "abhinav06501@gmail.com"}
+    - slot{"emailid": "abhinav06501@gmail.com"}
+    - action_send_mail
+    - utter_sent_email
+* affirm
+    - utter_restart
+* reject
+    - action_slot_reset
+    - reset_slots
+    - utter_goodbye
+
